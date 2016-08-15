@@ -1,0 +1,46 @@
+<div style="margin-bottom:15px">
+    <label>Selected Board:&nbsp;</label>
+    <select ng-options="cellBoard.name for cellBoard in cellBoardList"
+        ng-model="selectedCellBoard"></select>
+</div>
+
+<div style="margin-bottom:15px">
+
+  <cell-board ng-model="selectedCellBoard"
+    scale-vertical="20"
+    scale-horizontal="60">
+  </cell-board>
+
+</div>
+
+<div style="margin-bottom:15px">
+  <button class="btn btn-success" ng-click="addRows()">
+      Add Rows
+  </button>
+  <button class="btn btn-warning" ng-disabled="!selectedCellBoard.selectedCell"
+          ng-click="changeColor()">
+      Change Cell Color
+  </button>
+  <button class="btn btn-danger" ng-disabled="!selectedCellBoard.selectedCell"
+          ng-click="deleteRow()">
+      Delete Row
+  </button>
+  <button class="btn btn-primary" ng-disabled="!selectedCellBoard.selectedCell"
+          ng-click="duplicateRow()">
+      Duplicate Row
+  </button>
+</div>
+
+<div class="well well-lg">
+  <div ng-show="selectedCellBoard.selectedCell"
+       style="padding:15px"
+       ng-style="{'background-color' : selectedCellBoard.selectedCell.color}">
+      <div>
+          Selected Cell: <br />
+          {{selectedCellBoard.selectedCell.id}} : {{selectedCellBoard.selectedCell.color}}
+      </h1>
+  </div>
+  <div ng-show="!selectedCellBoard.selectedCell">
+      <h1>No selection</h1>
+  </div>
+</div>
