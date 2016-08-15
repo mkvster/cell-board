@@ -1,0 +1,48 @@
+﻿<div class="cell-board-container">
+    <div class="cell-board-content" ng-style="{ 'width': totalWidth, 'height': totalHeight}" ng-cloak>
+        <div ng-repeat="row in ngModel.rows" ng-style="{'width': totalRowWidth, 'height': getTotalRowHeight($index)}">
+            <ul class="cell-board-row-ul">
+                <li class="cell-board-noselect cell-board-row-li"
+                    ng-repeat="cell in row.cells"
+                    ng-style="(cell.cells || isSelectedCell(cell)) ? {} : {
+                        'background-color': getBgColor(cell)
+                    }">
+                    <div class="cell-area" ng-if="!cell.cells"
+                         ng-style="{
+                            'width' : getWidth(cell),
+                            'height' : getHeight(cell)
+                         }"
+                         ng-class="{'cell-area-selected' : isSelectedCell(cell)}"
+                         ng-click="setSelectedCell(cell, $event)">
+                        <div class="cell-content" tooltip="ok">
+                            {{cell.id}}
+                        </div>
+                    </div>
+                    <div ng-if="cell.cells">
+
+                        <ul class="cell-board-col-ul">
+                            <li class="cell-board-noselect cell-board-col-li"
+                                ng-repeat="subcell in cell.cells"
+                                ng-style="isSelectedCell(subcell) ? {} : {
+                                    'background-color': getBgColor(subcell)
+                                }">
+                                <div class="cell-area" ng-style="{
+                                        'width' : getWidth(subcell),
+                                        'height' : getHeight(subcell)
+                                    }"
+                                     ng-class="{'cell-area-selected' : isSelectedCell(subcell)}"
+                                     ng-click="setSelectedCell(subcell, $event)">
+                                    <div class="cell-content">
+                                        {{subcell.id}}
+                                    </div>
+
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
