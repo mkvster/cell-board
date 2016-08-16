@@ -1,13 +1,13 @@
 <div style="margin-bottom:15px">
     <label>Selected Board:&nbsp;</label>
-    <select ng-options="cellBoard.name for cellBoard in cellBoardList"
+    <select class="form-control" ng-options="cellBoard.name for cellBoard in cellBoardList"
         ng-model="selected.cellBoard"></select>
 </div>
 
 <div style="margin-bottom:15px">
 
   <cell-board ng-model="selected.cellBoard"
-    scale-vertical="20"
+    scale-vertical="25"
     scale-horizontal="60">
   </cell-board>
 
@@ -37,7 +37,7 @@
        ng-style="{'background-color' : selected.cellBoard.selectedCell.color}">
       <div>
           Selected Cell: <br />
-          {{selectedCellBoard.selectedCell.id}} : {{selectedCellBoard.selectedCell.color}}
+          {{selected.cellBoard.selectedCell.id}} : {{selected.cellBoard.selectedCell.color}}
       </h1>
   </div>
   <div ng-show="!selected.cellBoard.selectedCell">
