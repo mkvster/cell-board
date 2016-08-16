@@ -4,7 +4,9 @@
 
     var mainController = function ($scope, testBoard1, testBoard2, testBoard3, testBoard4) {
         $scope.cellBoardList = null;
-        $scope.selectedCellBoard = null;
+        $scope.selected = {
+          cellBoard: null
+        };
 
         $scope.init = function() {
           $scope.cellBoardList = [
@@ -17,13 +19,13 @@
             $scope.cellBoardList[i].rowsTemplate =
               angular.copy($scope.cellBoardList[i].rows)
           }
-          $scope.selectedCellBoard = $scope.cellBoardList[0];
+          $scope.selected.cellBoard = $scope.cellBoardList[0];
         }
 
         $scope.init();
 
         $scope.changeColor = function () {
-            var cellBoard = $scope.selectedCellBoard;
+            var cellBoard = $scope.selected.cellBoard;
             var color = "lightgreen";
             switch (cellBoard.selectedCell.color) {
                 case "lightgreen":
@@ -70,7 +72,7 @@
         }
 
         $scope.deleteRow = function () {
-            var cellBoard = $scope.selectedCellBoard;
+            var cellBoard = $scope.selected.cellBoard;
             var rowIndex = findRowIndex(cellBoard.rows,
                 cellBoard.selectedCell.id);
             cellBoard.selectedCell = null;
@@ -113,7 +115,7 @@
         }
 
         $scope.addRows = function () {
-            var cellBoard = $scope.selectedCellBoard;
+            var cellBoard = $scope.selected.cellBoard;
             var rowsTemplate = cellBoard.rowsTemplate;
             for (var k = 0; k < rowsTemplate.length; k++) {
                 $scope.addRowByTemplate(cellBoard, rowsTemplate[k]);
@@ -121,7 +123,7 @@
         }
 
         $scope.duplicateRow = function () {
-            var cellBoard = $scope.selectedCellBoard;
+            var cellBoard = $scope.selected.cellBoard;
             var rowIndex = findRowIndex(cellBoard.rows,
                 cellBoard.selectedCell.id);
             $scope.addRowByTemplate(cellBoard, cellBoard.rows[rowIndex]);
